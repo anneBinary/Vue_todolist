@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>待办清单</title>
+
+	<style type="text/css">
+		.complete{
+			text-decoration: line-through;
+		}
+		.cursor{
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+<div id="app">
+	<task-anne :list="tasks"></task-anne>
+</div>
+<template id="task-tem">
+	<ul>
+		<li v-for="task in list" :class="[task.complete?'complete':'','cursor']" @click="toggleclass(task)">{{task.todo}}</li>
+	</ul>
+</template>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	Vue.component('task-anne',{
+		template: '#task-tem',
+		props:['list'],
+		methods:{
+			toggleclass:function(task){
+				task.complete = !task.complete;
+			}
+		}
+	})
+	new Vue({
+		el: '#app',
+		data: {
+			tasks:[
+			{todo:'read a book',complete:false},
+			{todo:'Fitness',complete:false},
+			{todo:'programming',complete:true},
+			],
+			cursor:'cursor'
+		}
+	})
+</script>
+</body>
+</html>
